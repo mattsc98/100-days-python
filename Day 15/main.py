@@ -47,19 +47,20 @@ def check_resources(drink):
     if milk is None:
         milk = 0
         
-    resources['water']  = resources['water'] - water
-    resources['milk']   = resources['milk'] - milk
-    resources['coffee'] = resources['coffee'] - coffee
+    check_water     = resources['water'] - water
+    check_milk      = resources['milk'] - milk
+    check_coffee    = resources['coffee'] - coffee
     
-    if(resources['water'] < 0):
+    if(check_water < 0):
         print("Sorry there is not enough water")
         exit()
-    if(resources['milk'] < 0):
+    if(check_milk < 0):
         print("Sorry there is not enough milk")
         exit()
-    if(resources['coffee'] < 0):
+    if(check_coffee < 0):
         print("Sorry there is not enough coffee")    
-        exit()        
+        exit()  
+          
 
 def process_coins():
     
@@ -76,12 +77,36 @@ def process_coins():
     total_coins = quarters + dimes + nickles + pennies
     return total_coins
 
-def check_transaction_successful(drink_cost, coins_given):
+def check_transaction_successful(drink_cost, coins_given, drink_name):
+    change = 0.00
+
     if(drink_cost > coins_given):
         print("Sorry that's not enough money. Money refunded.")
-        return None
+        return False
     
-    # KOMPLI HAWN
+    else:
+        resources["money"] += drink_cost
+        
+        if(drink_cost != coins_given):
+            change = coins_given - drink_cost
+            change = round(change, 2)
+
+        print(f"Enjoy your {drink_name}! Here is ${change} in change")
+        return True
+
+def deduct_resources(drink):
+    ingredients = drink['ingredients']
+    
+    water   = ingredients.get('water')
+    coffee  = ingredients.get('coffee')
+    milk    = ingredients.get('milk')
+    
+    if milk is None:
+        milk = 0
+        
+    resources['water']     = resources['water'] - water
+    resources['milk']      = resources['milk'] - milk
+    resources['coffee']    = resources['coffee'] - coffee
 
 def coffee_machine():
     
@@ -115,8 +140,11 @@ def coffee_machine():
         
         coins_given = process_coins()
         
-        check_transaction = check_transaction_successful(drink['cost'], coins_given)
-        if check_transaction is None:
+        check_transaction = check_transaction_successful(drink['cost'], coins_given, user_input)
+        if check_transaction is False:
             continue
+
+        
+
             
 coffee_machine()
