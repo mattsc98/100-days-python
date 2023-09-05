@@ -10,11 +10,16 @@ class Ball(Turtle):
         self.color("white")
         self.penup()
         self.goto(START_POS)
+        self.x_move = MOVE_DISTANCE
+        self.y_move = MOVE_DISTANCE
         
     def move_ball(self):
-        new_x = self.xcor() + MOVE_DISTANCE
-        new_y = self.ycor() + MOVE_DISTANCE
+        new_x = self.xcor() + self.x_move
+        new_y = self.ycor() + self.y_move
         self.goto(new_x, new_y)
         
-
-    #add wall colision
+    def bounce_y(self):
+        self.y_move *= -1
+        
+    def bounce_x(self):
+        self.x_move *= -1    
