@@ -6,6 +6,29 @@ import json
 
 LOGO = 'Day 30\\Password+Manager+(End+of+Day+29)\\logo.png'
 DATA = 'Day 30\\Password+Manager+(End+of+Day+29)\\data.json'
+
+# ---------------------------- SEARCH BUTTON ------------------------------- #
+def find_password():
+    website = website_entry.get()
+    try:
+        with open(DATA, "r") as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        messagebox.showinfo(message="No data has been entered yet!") 
+        data = None 
+        
+    if data:
+        try:
+            site = data[website]
+        except KeyError:
+            messagebox.showinfo(message="No details for the website exist")
+            site = None
+            
+        if site:
+            email = data[website]["email"]
+            password = data[website]["password"]
+            messagebox.showinfo(title=website, message=f'Email: {email} \nPassword: {password}')
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 #Password Generator Project
@@ -85,6 +108,8 @@ password_entry = Entry(width=21)
 password_entry.grid(row=3, column=1)
 
 # Buttons
+search_button = Button(text="Search", command=find_password)
+search_button.grid(row=1, column=2)
 generate_password_button = Button(text="Generate Password", command=generate_password)
 generate_password_button.grid(row=3, column=2)
 add_button = Button(text="Add", width=36, command=save)
