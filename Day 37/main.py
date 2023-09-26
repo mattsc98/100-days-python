@@ -35,5 +35,15 @@ headers = {
     "X-USER-TOKEN" : TOKEN
 }
 
-response = requests.post(url=graph_endpoint, json=graph_config, headers=headers)
+# response = requests.post(url=graph_endpoint, json=graph_config, headers=headers)
+# print(response.text)
+
+pixela_add_endpoint = f'{graph_endpoint}/{GRAPH_ID}'
+
+pixela_add_config = {
+    'date' : '20230926',
+    'quantity' : '20'
+}
+
+response = requests.post(url=pixela_add_endpoint, json=pixela_add_config, headers=headers)
 print(response.text)
