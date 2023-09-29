@@ -3,10 +3,6 @@ import requests
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
-SPOTIFY_CLIENT_ID = '9b02baf1cc0148158a7b1448c81566b3'
-SPOTIFY_CLIENT_SECRET = '1b61f08cacc047f5a18179efbe84ff2e'
-SPOTIFY_TOKEN = 'Day 46\\token.txt'
-user_id = 'BQCqT9iz3aUHqNaBjk0jB_yVubVAgzmRpQFeFqSzOIrVq3uXaRS3fayeAgwhN41ZC_71JYueqh8PJRFHMQCYRoYi6iTX0DQLfJQQ7ciEIrn7itEp7R011BG2Mmfw3vrFOPXd9SeiSkSYdmKvcuslyVvLcE3vZmGD-ZCiYWEESUP-F-lex-CA7n_CFGbKuGi6_8dUtBRerXJNEBxZVDZ_vr3FOreWkwPTLvtc1A'
 
 date = input("Give me the date you want to see the top 100, in the format YYYY-MM-DD:\n")
 
